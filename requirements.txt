@@ -4,4 +4,6 @@ pytorch-ignite>=0.4.8
 pyyaml
 albumentations
 image_dataset_viz
-
+SimpleITK
+matplotlib
+monai
