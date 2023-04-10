@@ -27,18 +27,11 @@ pip3.8 --version
 # pip 全局切换清华源
 pip3.8 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 
-# pip install requirements
-
 # get out of Python-${VERSION} and the EnvSetUp file
 cd ../..  
+
 # install requirements
 pip3.8 install -r requirements.txt
-
-# install git 
-sudo dnf install git
-
-# test git
-git --version
 
 
 

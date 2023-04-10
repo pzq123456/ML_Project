@@ -1,7 +1,6 @@
 from functools import partial
 from pprint import pformat
 from typing import Any, cast
-
 import ignite.distributed as idist
 import yaml
 from data import denormalize, setup_data
