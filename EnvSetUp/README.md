@@ -11,3 +11,8 @@
 - 使用 VSCode 连接远程服务器，进行代码开发和调试
 
 > 显然还得装个 git，不然怎么提交代码呢
+
+启动tensorboard: 其中 `runs` 是存放日志的文件夹
+```bash
+tensorboard --logdir=logs
+```

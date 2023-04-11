@@ -19,6 +19,16 @@ from ignite.utils import setup_logger
 
 
 def setup_parser():
+    '''Setup parser for command line arguments.
+        1. 读取config.yaml文件
+        2. 创建ArgumentParser对象
+        3. 添加参数
+        4. 返回parser对象
+    Returns
+    -------
+    parser
+        an instance of `ArgumentParser`
+    '''
     with open("config.yaml", "r") as f:
         config = yaml.safe_load(f.read())
 
@@ -35,6 +45,7 @@ def setup_parser():
 
 def log_metrics(engine: Engine, tag: str) -> None:
     """Log `engine.state.metrics` with given `engine` and `tag`.
+       - 使用给定的`engine`和`tag`记录`engine.state.metrics`。
 
     Parameters
     ----------
@@ -57,20 +68,22 @@ def resume_from(
     model_dir: Optional[str] = None,
 ) -> None:
     """Loads state dict from a checkpoint file to resume the training.
+        从检查点文件加载状态字典以恢复训练。
 
     Parameters
     ----------
     to_load
-        a dictionary with objects, e.g. {“model”: model, “optimizer”: optimizer, ...}
+        a dictionary with objects to load state dict from a checkpoint.
+        加载状态字典的对象字典。
     checkpoint_fp
-        path to the checkpoint file
+        a path to a checkpoint file or URL to a checkpoint file.
+        检查点文件的路径或检查点文件的URL。
     logger
-        to log info about resuming from a checkpoint
+        an instance of `Logger`.
     strict
-        whether to strictly enforce that the keys in `state_dict` match the keys
-        returned by this module’s `state_dict()` function. Default: True
-    model_dir
-        directory in which to save the object
+        whether to strictly enforce that the keys in `state_dict` match the keys returned by this module’s
+        `state_dict()` function. Default: `True`.
+        是否严格执行`state_dict`中的键与此模块的`state_dict()`函数返回的键匹配。 默认值：`True`。
     """
     if isinstance(checkpoint_fp, str) and checkpoint_fp.startswith("https://"):
         checkpoint = torch.hub.load_state_dict_from_url(
@@ -173,6 +186,13 @@ def setup_handlers(
 
 
 def lambda_lr_scheduler(iteration, lr0, n, a):
+    '''Decay learning rate exponentially.(指数衰减学习率)
+    Args:
+        iteration: current iteration
+        lr0: initial learning rate
+        n: total number of iterations
+        a: decay rate
+    '''
     return lr0 * pow((1.0 - 1.0 * iteration / n), a)
 
 

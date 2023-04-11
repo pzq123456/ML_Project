@@ -11,6 +11,14 @@ from PIL import Image
 from torch.utils.data import Dataset
 from torchvision.datasets.voc import VOCSegmentation
 
+# notes:
+# - we use `VOCSegmentationPIL` instead of `VOCSegmentation` to avoid
+#   loading images with PIL and then converting them to numpy arrays
+# - we use `TransformedDataset` to apply transforms to the dataset
+# - we use `ignore_mask_boundaries` to ignore the mask boundaries
+# - we use `denormalize` to denormalize the images
+# - we use `prepare_image_mask` to prepare the images and masks
+# - we use `download_datasets` to download the datasets
 
 class TransformedDataset(Dataset):
     def __init__(self, ds, transform_fn):
